@@ -1,0 +1,6 @@
+FullNode.jar
+FullNode/logs
+FullNode/output-directory
+SR/logs
+SR/output-directory
+proposal/node_modules

@@ -1,0 +1,13 @@
+{
+  "name": "proposal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "tronweb": "4.4.0"
+  },
+  "scripts": {
+    "execute-proposal": "node execute.js",
+    "call-verify": "node call.js"
+  }
+}
