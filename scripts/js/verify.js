@@ -2,9 +2,9 @@
 async function callVerfier() {
     var TronWeb = require('tronweb');
     var tronWeb = new TronWeb({
-        fullNode: 'http://139.144.183.185:26667',
-        solidityNode: 'http://139.144.183.185:26668',
-        privateKey: '138a22c03039e688daa2b7c785d1e8d6b9375d4413e6ea82471b1e7a61701a9d',
+      fullNode: process.env.FULL_NODE_URL,
+      solidityNode: process.env.SOLIDITY_NODE_URL,
+      privateKey: process.env.PRIVATE_KEY,
     })
 
     let abi = [
@@ -33,7 +33,7 @@ async function callVerfier() {
           "type": "function"
         }
       ];
-    let contract = await tronWeb.contract(abi, 'TNSVawmppWESV4n9GB4qMLjqbmoZi6zm48'); 
+    let contract = await tronWeb.contract(abi, process.env.TRANSFER_VERIFIER_ADDRESS); 
     let result = await contract.verifyProof(
         [
             "410187940904267791665857625594021464304867517571189176088693585418403627175", 
@@ -49,7 +49,9 @@ async function callVerfier() {
             "3618836117018041122057960110621015024190242066995639123523823804179020820127", 
             "17452347979391447598200144953804022165728450595367847105208004839301667143347", 
             "10758418988168490454233654079316113438289985487422580576512164625214747833303", 
-            "16113585132297177719187882899369575704186199591529360947329945124938113973184"]).call();
+            "16113585132297177719187882899369575704186199591529360947329945124938113973184"
+        ]
+    ).call();
     console.log(result);
 }
 

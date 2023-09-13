@@ -7,7 +7,7 @@
     "tronweb": "4.4.0"
   },
   "scripts": {
-    "execute-proposal": "node execute.js",
-    "call-verify": "node call.js"
+    "proposal": "node proposal.js",
+    "verify": "node verify.js"
   }
 }

@@ -3,4 +3,6 @@ FullNode/logs
 FullNode/output-directory
 SR/logs
 SR/output-directory
-proposal/node_modules
+scripts/js/node_modules
+scripts/js/yarn.lock
+verifier/build
