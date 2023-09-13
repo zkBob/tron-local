@@ -2,39 +2,54 @@
 async function callVerfier() {
     var TronWeb = require('tronweb');
     var tronWeb = new TronWeb({
-        fullNode: 'http://127.0.0.1:26667',
-        solidityNode: 'http://127.0.0.1:26668',
-        privateKey: 'da146374a75310b9666e834ee4ad0866d6f4035967bfc76217c5a495fff9f0d0',
+        fullNode: 'http://139.144.183.185:26667',
+        solidityNode: 'http://139.144.183.185:26668',
+        privateKey: '138a22c03039e688daa2b7c785d1e8d6b9375d4413e6ea82471b1e7a61701a9d',
     })
 
     let abi = [
         {
-            "inputs": [
-                {
-                    "internalType": "uint256[3]",
-                    "name": "input",
-                    "type": "uint256[3]"
-                },
-                {
-                    "internalType": "uint256[8]",
-                    "name": "p",
-                    "type": "uint256[8]"
-                }
-            ],
-            "name": "verifyProof",
-            "outputs": [
-                {
-                    "internalType": "bool",
-                    "name": "",
-                    "type": "bool"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
+          "inputs": [
+            {
+              "internalType": "uint256[5]",
+              "name": "input",
+              "type": "uint256[5]"
+            },
+            {
+              "internalType": "uint256[8]",
+              "name": "p",
+              "type": "uint256[8]"
+            }
+          ],
+          "name": "verifyProof",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
         }
-    ];
-    let contract = await tronWeb.contract(abi, 'TTm9tCzzbUfDUkCk1DtQty16RLCC6kE64Q'); 
-    let result = await contract.verifyProof([0, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0]).call();
+      ];
+    let contract = await tronWeb.contract(abi, 'TNSVawmppWESV4n9GB4qMLjqbmoZi6zm48'); 
+    let result = await contract.verifyProof(
+        [
+            "410187940904267791665857625594021464304867517571189176088693585418403627175", 
+            "3582932279793408241095145848517164196468279227198151416866003392249976328215", 
+            "21702782062704102408149255137659156834040101148294719406156063531394617768752",
+            "458964024542843322412024634467191796783627388968596258037504", 
+            "1105154793589499054101509063059520053678357711567632030398761789118900390304"
+        ], [
+            "17319632901362089667297833381115050472198619632678725143485052131880736564716", 
+            "20217952180782984327874966839451172866880046964759060634104328470666346490787", 
+            "14675072293281706791212610449476963932780136199834552157253791069835791205313", 
+            "11523869594945451880407802780789187832894590986555492595351670286111658956891", 
+            "3618836117018041122057960110621015024190242066995639123523823804179020820127", 
+            "17452347979391447598200144953804022165728450595367847105208004839301667143347", 
+            "10758418988168490454233654079316113438289985487422580576512164625214747833303", 
+            "16113585132297177719187882899369575704186199591529360947329945124938113973184"]).call();
     console.log(result);
 }
 
