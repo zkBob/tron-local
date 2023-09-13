@@ -16,7 +16,7 @@ Private key with some TRX: `138a22c03039e688daa2b7c785d1e8d6b9375d4413e6ea82471b
 
 ## Deploy verifier
 1. `./scripts/deploy.sh`
-2. Fill `TRANSFER_VERIFIER_URL` in the `.env` file with output address
+2. Fill `TRANSFER_VERIFIER_ADDRESS` in the `.env` file with the output address
 
 ## Call the contract
 1. `./scripts/verify.sh`

@@ -199,6 +199,25 @@ contract TransferVerifier {
         *          above and the public inputs
         */
     function verifyProof(uint256[5] memory input, uint256[8] memory p) public view returns (bool) {
-        return true;
+        // Make sure that each element in the proof is less than the prime q
+        for (uint8 i = 0; i < p.length; i++) {
+            require(p[i] < PRIME_Q, "verifier-proof-element-gte-prime-q");
+        }
+        Proof memory _proof;
+        _proof.A = Pairing.G1Point(p[0], p[1]);
+        _proof.B = Pairing.G2Point([p[3], p[2]], [p[5], p[4]]);
+        _proof.C = Pairing.G1Point(p[6], p[7]);
+        VerifyingKey memory vk = verifyingKey();
+        // Compute the linear combination vk_x
+        Pairing.G1Point memory vk_x = Pairing.G1Point(0, 0);
+        vk_x = Pairing.plus(vk_x, vk.IC[0]);
+        // Make sure that every input is less than the snark scalar field
+        for (uint256 i = 0; i < input.length; i++) {
+            require(input[i] < SNARK_SCALAR_FIELD, "verifier-gte-snark-scalar-field");
+            vk_x = Pairing.plus(vk_x, Pairing.scalar_mul(vk.IC[i + 1], input[i]));
+        }
+        return Pairing.pairing(
+            Pairing.negate(_proof.A), _proof.B, vk.alfa1, vk.beta2, vk_x, vk.gamma2, _proof.C, vk.delta2
+        );
     }
 }
