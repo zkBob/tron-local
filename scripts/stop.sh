@@ -19,3 +19,7 @@ while [ $count -le 360 ]; do
     exit 1
   fi
 done
+
+pushd ./scripts/nginx &>/dev/null
+    docker-compose stop
+popd &>/dev/null
